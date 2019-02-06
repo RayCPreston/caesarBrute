@@ -6,19 +6,19 @@
 
 using namespace std;
 
-bool inCharArray(char c, char arr[]){
+bool contains(char c, string s){
     bool found = false;
-    for(int i = 0; i < arr.length(); i++){
-        if(c == arr[i]){
+    for(int i = 0; i < s.length(); i++){
+        if(c == s[i]){
             found = true;
         }
     }
     return found;
 }
 
-int atPosition(char c, char arr[]){
-    for(int i = 0; i< arr.length(); i++){
-        if(c == arr[i]){
+int atPosition(char c, string s){
+    for(int i = 0; i< s.length(); i++){
+        if(c == s[i]){
             return i;
         }
     }
@@ -27,34 +27,32 @@ int atPosition(char c, char arr[]){
 
 int main(){
     //the user will input the message to be ran through all possible keys
-    char message[100000];
+    string message;
     cout << "Please paste the message to be deciphered by brute force: ";
-    cin.getline(message, 100000);
+    cin >> message;
     cout << message << endl;
-    //the following will convert the message to all lowercase for decryption
-    int i = 0;
-    char x;
-    char lower[100000];
-    while(message[i]){
-        x = message[i];
-        x = tolower(x);
-        lower[i] = x;
-        i++;
-    }
-    //an array will make using the key easy
-    char alpha[] = "abcdefghijklmnopqrstuvwxyz";
+    string alpha = "abcdefghijklmnopqrstuvwxyz";
     int key;
     for(key = 0; key < alpha.length(); key++){
         //for outputting each character solved until completion
-        output = "";  
-        for(int i = 0; i < lower.length; i++){
+        string output = "";  
+        cout << "Key: " << (key) << "  ";
+        for(int i = 0; i < message.length(); i++){
             //if the current letter in lower is in alpha, apply key shift
-            if(found(lower[i], alpha)){
-                int pos = atPosition(lower[i], alpha);
-                if(pos + key < 26){
-                    output
+            if(contains(tolower(message[i]), alpha)){
+                int pos = atPosition(message[i], alpha);
+                if(pos + (key) < 25){
+                    cout << (alpha[pos + (key)]);
+                }
+                else{ 
+                    cout << (alpha[pos - (26 - (key))]); 
+                }
+            }
+            else{
+                cout << message[i];
             }
         }
+        cout << endl;
     }
    
    
